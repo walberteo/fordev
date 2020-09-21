@@ -31,6 +31,8 @@ class HttpAdapter implements HttpClient {
       return null;
     } else if (response.statusCode == 400) {
       throw HttpError.badRequest;
+    } else {
+      throw HttpError.serverError;
     }
   }
 }

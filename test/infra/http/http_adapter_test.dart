@@ -115,6 +115,7 @@ void main() {
       // assert
       expect(future, throwsA(HttpError.badRequest));
     });
+
     test('Should return BadResquesError if post returns 400', () async {
       // arrange
       mockResponse(400);
@@ -123,6 +124,16 @@ void main() {
 
       // assert
       expect(future, throwsA(HttpError.badRequest));
+    });
+
+    test('Should return ServerError if post returns 500', () async {
+      // arrange
+      mockResponse(500);
+      // act
+      final future = sut.request(url: url, method: 'post');
+
+      // assert
+      expect(future, throwsA(HttpError.serverError));
     });
   });
 }
