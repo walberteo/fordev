@@ -58,5 +58,20 @@ void main() {
         ),
       );
     });
+
+    test('Should call post whitout body', () async {
+      // arrange
+
+      // act
+      await sut.request(url: url, method: 'post');
+
+      // assert
+      verify(
+        client.post(
+          any,
+          headers: anyNamed('headers'),
+        ),
+      );
+    });
   });
 }
