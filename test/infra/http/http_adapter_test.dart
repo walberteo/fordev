@@ -1,8 +1,10 @@
 import 'package:faker/faker.dart';
-import 'package:for_dev/infra/http/http.dart';
 import 'package:http/http.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+
+import 'package:for_dev/data/http/http_error.dart';
+import 'package:for_dev/infra/http/http.dart';
 
 class ClientSpy extends Mock implements Client {}
 
@@ -102,6 +104,25 @@ void main() {
 
       // assert
       expect(response, null);
+    });
+
+    test('Should return BadResquesError if post returns 400', () async {
+      // arrange
+      mockResponse(400, body: '');
+      // act
+      final future = sut.request(url: url, method: 'post');
+
+      // assert
+      expect(future, throwsA(HttpError.badRequest));
+    });
+    test('Should return BadResquesError if post returns 400', () async {
+      // arrange
+      mockResponse(400);
+      // act
+      final future = sut.request(url: url, method: 'post');
+
+      // assert
+      expect(future, throwsA(HttpError.badRequest));
     });
   });
 }
