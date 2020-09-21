@@ -97,9 +97,19 @@ void main() {
       expect(response, {'any_key': 'any_value'});
     });
 
-    test('Should return data if post return 200', () async {
+    test('Should return data if post return 200 without data', () async {
       // arrange
       mockResponse(200, body: '');
+      // act
+      final response = await sut.request(url: url, method: 'post');
+
+      // assert
+      expect(response, null);
+    });
+
+    test('Should return data if post return 204', () async {
+      // arrange
+      mockResponse(204, body: '');
       // act
       final response = await sut.request(url: url, method: 'post');
 
