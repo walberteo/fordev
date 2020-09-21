@@ -41,11 +41,20 @@ void main() {
   });
 
   group('post', () {
+    PostExpectation mockResquest() => when(
+        client.post(any, body: anyNamed('body'), headers: anyNamed('headers')));
+
+    void mockResponse(int statusCode, {body: '{"any_key":"any_value"}'}) {
+      mockResquest().thenAnswer((_) async => Response(body, statusCode));
+    }
+
+    setUp(() {
+      mockResponse(200);
+    });
+
     test('Should call post whit correct values', () async {
       // arrange
-      when(client.post(any,
-              body: anyNamed('body'), headers: anyNamed('headers')))
-          .thenAnswer((_) async => Response('{"any_key":"any_value"}', 200));
+
       // act
       await sut
           .request(url: url, method: 'post', body: {'any_key': 'any_value'});
@@ -65,8 +74,7 @@ void main() {
 
     test('Should call post whitout body', () async {
       // arrange
-      when(client.post(any, headers: anyNamed('headers')))
-          .thenAnswer((_) async => Response('{"any_key":"any_value"}', 200));
+
       // act
       await sut.request(url: url, method: 'post');
 
@@ -81,8 +89,7 @@ void main() {
 
     test('Should return data if post return 200', () async {
       // arrange
-      when(client.post(any, headers: anyNamed('headers')))
-          .thenAnswer((_) async => Response('{"any_key":"any_value"}', 200));
+
       // act
       final response = await sut.request(url: url, method: 'post');
 
@@ -92,8 +99,7 @@ void main() {
 
     test('Should return data if post return 200', () async {
       // arrange
-      when(client.post(any, headers: anyNamed('headers')))
-          .thenAnswer((_) async => Response('', 200));
+      mockResponse(200, body: '');
       // act
       final response = await sut.request(url: url, method: 'post');
 
