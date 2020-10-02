@@ -25,6 +25,7 @@ dev_dependencies:
   faker:
   equatable:
   get:
+  flutter_secure_storage:
 
 flutter:
   uses-material-design: true
