@@ -19,7 +19,7 @@ void main() {
   PostExpectation mockRequest() => when(httpClient.request(
       url: anyNamed('url'),
       method: anyNamed('method'),
-      body: anyNamed('body')));
+      bodyValue: anyNamed('body')));
 
   void mockHttpData(Map data) {
     mockRequest().thenAnswer((_) async => data);
@@ -49,7 +49,7 @@ void main() {
     verify(httpClient.request(
       url: url,
       method: 'post',
-      body: {'email': params.email, 'password': params.password},
+      bodyValue: {'email': params.email, 'password': params.password},
     ));
   });
 

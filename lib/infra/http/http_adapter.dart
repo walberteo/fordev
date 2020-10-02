@@ -13,13 +13,13 @@ class HttpAdapter implements HttpClient {
   Future<Map> request({
     @required String url,
     @required String method,
-    Map body,
+    Map bodyValue,
   }) async {
     final headers = {
       'content-type': 'application/json',
       'accept': 'application/json'
     };
-    final jsonBody = body != null ? jsonEncode(body) : null;
+    final jsonBody = bodyValue != null ? jsonEncode(bodyValue) : null;
     var response = Response('', 500);
     try {
       if (method == 'post') {

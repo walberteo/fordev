@@ -51,8 +51,8 @@ void main() {
       // arrange
 
       // act
-      await sut
-          .request(url: url, method: 'post', body: {'any_key': 'any_value'});
+      await sut.request(
+          url: url, method: 'post', bodyValue: {'any_key': 'any_value'});
 
       // assert
       verify(

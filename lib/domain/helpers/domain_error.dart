@@ -11,6 +11,7 @@ extension DomainErrorExtension on DomainError {
         break;
       case DomainError.unexpected:
         return 'Algo errado aconteceu. Tente novamente em breve.';
+
       default:
         return '';
     }
