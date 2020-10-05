@@ -19,7 +19,7 @@ void main() {
   PostExpectation mockRequest() => when(httpClient.request(
       url: anyNamed('url'),
       method: anyNamed('method'),
-      bodyValue: anyNamed('body')));
+      bodyValue: anyNamed('bodyValue')));
 
   void mockHttpData(Map data) {
     mockRequest().thenAnswer((_) async => data);
